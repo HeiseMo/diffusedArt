@@ -1,0 +1,124 @@
+body.active-modal {
+    overflow-y: hidden;
+}
+
+.btn-modal {
+    padding: 10px 20px;
+    display: block;
+    margin: 100px auto 0;
+    font-size: 18px;
+}
+
+.modal, .overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+}
+.overlay {
+    background: rgba(49,49,49,0.8);
+
+}
+.modal-content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background: #282c34;
+    border: 1px solid white;
+    height: 80%;
+    min-width: 300px;
+    max-width: 600px;
+    border-radius: 1vw;
+    border-color: rgb(63 63 70/5);
+}
+
+.img-modal {
+    width: auto;
+    height: 40vh;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 7px;
+}
+.modal-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+fieldset{
+    line-height: 1em;
+    margin: 1em;
+    padding: 1px;
+    background-color: #1e2127;
+    border-color: #ffffff1a;
+    color: white;
+    font-family: monospace
+}
+fieldset > legend {
+    color: coral;
+    font-family: fantasy;
+}
+fieldset > p{
+    margin: 0.2em;
+    display: flex;
+    align-items: flex-start;
+}
+.modal-prompts{
+    width: 80%;
+    height: 80%;
+}
+.modal-small-info{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+    min-width: 300px;
+    height: auto;
+}
+
+.modal-small-info > fieldset > p {
+    height: 2vh;
+    display: flex;
+    justify-content: center;
+}
+.modal-prompts > fieldset > p {
+    overflow-x: auto;
+    height: 6vh;
+}
+/*Scrollbar stuff*/
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+    max-height: 100vh;
+  }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f11a;
+    max-height: 100vh; 
+  }
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    max-height: 100vh; 
+  }
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    max-height: 100vh; 
+  }
