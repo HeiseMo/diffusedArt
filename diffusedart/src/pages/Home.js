@@ -4,12 +4,14 @@ import { renderMatches } from "react-router-dom";
 import ImageList from "../components/ImageList";
 import SearchBar from "../components/SearchBar";
 import UploadImage from "../components/UploadImage";
+import AuthService from '../components/auth/auth-service';
 
 export default class Home extends React.Component {
-    state = {
-      searchValue: null,
-    };
-  
+  constructor(props){
+    super(props);
+    this.state = { loggedInUser: null, searchValue: null };
+    this.service = new AuthService();
+  }
     render() {
         const getSearchValue = (e) => {
             this.setState({ searchValue: e });

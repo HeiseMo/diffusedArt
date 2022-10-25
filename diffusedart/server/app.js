@@ -9,10 +9,22 @@ const exif = require("exif-parser");
 const png = require("png-metadata");
 const imageModel = require("./Models/imageModel");
 const dotenv = require("dotenv");
-
+const axios = require("axios");
+const queryString = require('querystring')
+const session = require("express-session");
+const passport = require("passport");
+const store = require("connect-mongo");
 dotenv.config();
-console.log(process.env.REACT_APP_MONGODB_URL, "URL")
-const corsOrigin = "http://localhost:3000";
+const discordStrategy = require("./stratagies/discordstrategy");
+
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+
+//Discord OAuth2
+const DiscordOauth2 = require("discord-oauth2");
+
+
+
+const corsOrigin = "http://localhost:3000" || "http://api.diffusedhermit.com";
 // mongoose connection
 mongoose.connect(process.env.REACT_APP_MONGODB_URL, {
   useUnifiedTopology: true,
@@ -25,15 +37,61 @@ db.once("open", function () {
 });
 
 app.use(express.static(__dirname + "../..")); // serve static files
-app.use(
+app.use(session ({
+  secret: "theyellowdoglovestobark",
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7 * 2, // 2 weeks
+  },
+  store: store.create({ mongoUrl: process.env.REACT_APP_MONGODB_URL }),
+}),
   cors({
     origin: [corsOrigin],
     method: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
+//Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Body Parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+let clientId = process.env.REACT_APP_DISCORD_OAUTH_CLIENT_ID
+let clientSecret = process.env.REACT_APP_DISCORD_OAUTH_SECRET
+let redirectUri = process.env.REACT_APP_DISCORD_OAUTH_REDIRECT_URI
+console.log(clientId, clientSecret, redirectUri)
+
+const authRoute = require("./routes/auth");
+app.use("/auth", authRoute)
+app.get("/api/auth/discord/redirect", async (req, res) => {
+  console.log(req.query.code)
+  let code = req.query.code;
+  if (req.query.code === undefined || req.query.code == '') return next();
+
+      const params = new URLSearchParams();
+      params.append('client_id', clientId);
+      params.append('client_secret', clientSecret);
+      params.append('grant_type', 'authorization_code');
+      params.append('code', code);
+      params.append('redirect_uri', redirectUri);
+      params.append('scope', 'identify');
+
+      const response = await fetch("https://discordapp.com/api/oauth2/token", {
+        method: 'POST',
+        body: params,
+        headers: {
+            "Content-type": "application/x-www-form-urlencoded"
+        },
+      });
+     const json = await response.json();
+      console.log(json);
+     //debug('%O', json);
+     res.send(json)
+
+});
 
 const imageUploadPath = "../public/uploads/images";
 const storage = multer.diskStorage({

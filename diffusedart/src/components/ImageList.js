@@ -2,6 +2,7 @@ import React from "react";
 import ImageCard from "./imageCard";
 import axios from "axios";
 //import Loading from "./Loading";
+const baseURL = "http://api.diffusedhermit.com/auth";
 
 export default class ImageList extends React.Component {
   state = {
@@ -16,7 +17,7 @@ export default class ImageList extends React.Component {
 
   getImages = () => {
     axios
-      .get("http://localhost:4000/images")
+      .get(baseURL)
       .then((response) => {
         console.log(response.data);
         const data = response.data;
