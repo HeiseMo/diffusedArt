@@ -7,7 +7,7 @@ function UploadImage() {
   const handleUpload = () => {
     console.log("uploading");
     axios
-      .post("http://localhost:4000/image-upload", image)
+      .post("http://135.125.204.233:4000/image-upload", image)
       .then((res) => {
         console.log(res, "this is the response");
       })

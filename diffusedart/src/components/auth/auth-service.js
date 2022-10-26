@@ -2,7 +2,7 @@ import axios from 'axios';
 class AuthService {
   constructor() {
     let service = axios.create({
-      baseURL: 'http://localhost:4000/auth',
+      baseURL: 'http://135.125.204.233:4000/auth',
       withCredentials: true
     });
     this.service = service;
