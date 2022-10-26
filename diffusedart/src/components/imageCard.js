@@ -16,7 +16,7 @@ export default class imageCard extends React.Component {
       document.body.classList.remove("modal-open");
     }
     return (
-      <div onClick={this.toggleModal} className="img-container">
+      <div key={this.props.id} onClick={this.toggleModal} className="img-container">
         <img className="img-box" src={this.props.location}></img>
         {this.state.modal && (
           <div className="modal">

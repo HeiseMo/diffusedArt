@@ -1,16 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { renderMatches } from "react-router-dom";
 import ImageList from "../components/ImageList";
 import SearchBar from "../components/SearchBar";
-import UploadImage from "../components/UploadImage";
+import Navbar from "../components/Navbar";
 import AuthService from '../components/auth/auth-service';
 
 export default class Home extends React.Component {
   constructor(props){
     super(props);
-    this.state = { loggedInUser: null, searchValue: null };
-    this.service = new AuthService();
+    this.state = { searchValue: null };
   }
     render() {
         const getSearchValue = (e) => {
@@ -18,8 +15,8 @@ export default class Home extends React.Component {
           };
       return (
         <div>
-            <UploadImage />
-            <SearchBar getSearchValue={getSearchValue}/>
+          <Navbar logoutUser={this.props.logoutUser} login={this.props.login} user={this.props.user}/>
+            <SearchBar login={this.props.login} user={this.props.user} getSearchValue={getSearchValue}/>
             <ImageList searchValue={this.state.searchValue} />
       </div>
       );

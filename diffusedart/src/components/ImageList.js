@@ -2,7 +2,6 @@ import React from "react";
 import ImageCard from "./imageCard";
 import axios from "axios";
 //import Loading from "./Loading";
-const baseURL = "http://api.diffusedhermit.com/auth";
 
 export default class ImageList extends React.Component {
   state = {
@@ -12,14 +11,12 @@ export default class ImageList extends React.Component {
 
   componentDidMount() {
     this.getImages();
-    console.log(this.state.images[0]);
   }
 
   getImages = () => {
     axios
-      .get(baseURL)
+      .get("http://localhost:4000/images")
       .then((response) => {
-        console.log(response.data);
         const data = response.data;
         this.setState({ images: data });
       })
@@ -30,8 +27,6 @@ export default class ImageList extends React.Component {
   
   render() {
     let data = this.props.searchValue;
-    let test = this.state.images;
-    console.log(data, "data");
 
     return (
       <div className="img-list">
@@ -39,14 +34,11 @@ export default class ImageList extends React.Component {
           
           let count = 0;
             if (data == null) {
-              console.log("im empty")
               return item;
             }
             let arrData = data.split(" ");
-            console.log(typeof data)
             for(let i = 0; i < arrData.length; i++) {
               if (item.prompt.toLowerCase().includes(arrData[i].toLowerCase())) {
-                console.log(arrData[i], "im here")
                 count += 1;
               }
 
@@ -55,20 +47,8 @@ export default class ImageList extends React.Component {
             return item;
           }
           }).map((item) => {
-            return <ImageCard key={item.id} {...item} />;
-          })
-        
-        /*this.state.images.filter((item) => {
-            if (data == null) {
-              console.log("im empty")
-              return item;
-            } else if (item.prompt.toLowerCase().includes(data.toLowerCase())) {
-              console.log("im not empty")
-              return item;
-            }
-          }).map((item) => {
-            return <ImageCard key={item.id} {...item} />;
-          })*/}
+            return <ImageCard key={item._id} {...item} />;
+          })}
       </div>
     );
   }

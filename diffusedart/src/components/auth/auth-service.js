@@ -1,9 +1,8 @@
 import axios from 'axios';
-const baseURL = "http://api.diffusedhermit.com/auth";
 class AuthService {
   constructor() {
     let service = axios.create({
-      baseURL: baseURL,
+      baseURL: 'http://localhost:4000/auth',
       withCredentials: true
     });
     this.service = service;
@@ -19,8 +18,12 @@ class AuthService {
   }
    
   logout = () => {
-    return this.service.post('/logout', {})
-    .then(response => response.data)
+    return this.service.get('/logout', {})
+    .then(response => {
+      console.log(response.data)
+      return response.data
+      
+    })
   }
 }
  
