@@ -52,7 +52,7 @@ export default class App extends React.Component {
     this.fetchUser();
   }
   render() {
-this.fetchUser()
+//this.fetchUser()
     return (
       <div>
       <Router>
