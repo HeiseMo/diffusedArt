@@ -67,7 +67,7 @@ let redirectUri = process.env.REACT_APP_DISCORD_OAUTH_REDIRECT_URI;
 const authRoute = require("./routes/auth");
 app.use("/api/auth", authRoute);
 
-const imageUploadPath = "../public/uploads/images";
+const imageUploadPath = "./uploads/images";
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, imageUploadPath);

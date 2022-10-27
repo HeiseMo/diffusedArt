@@ -10,9 +10,7 @@
 
 # production
 /build
-/diffusedart/build
-#Server
-/server/.env
+
 # Images
 /public/uploads/images
 # misc
