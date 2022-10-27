@@ -65,7 +65,7 @@ let clientSecret = process.env.REACT_APP_DISCORD_OAUTH_SECRET;
 let redirectUri = process.env.REACT_APP_DISCORD_OAUTH_REDIRECT_URI;
 
 const authRoute = require("./routes/auth");
-app.use("/auth", authRoute);
+app.use("/api/auth", authRoute);
 
 const imageUploadPath = "../public/uploads/images";
 const storage = multer.diskStorage({
@@ -77,7 +77,7 @@ const storage = multer.diskStorage({
   },
 });
 const imageUpload = multer({ storage: storage });
-app.post("/image-upload", imageUpload.array("myImage"), (req, res) => {
+app.post("/api/image-upload", imageUpload.array("myImage"), (req, res) => {
   let filePath = req.files[0].path;
   let payload = photo(filePath, function (result) {
     return result;
@@ -142,7 +142,7 @@ function photo(filePath, callback) {
   return object;
 }
 
-app.get("/images", (req, res) => {
+app.get("/api/images", (req, res) => {
   imageModel
     .find({})
     .then((data) => {
