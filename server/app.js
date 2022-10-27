@@ -34,7 +34,6 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function () {
   console.log("we are connected!");
 });
-
 app.use(express.static(__dirname + "../..")); // serve static files
 app.use(
   cors({
@@ -67,7 +66,8 @@ let redirectUri = process.env.REACT_APP_DISCORD_OAUTH_REDIRECT_URI;
 const authRoute = require("./routes/auth");
 app.use("/api/auth", authRoute);
 
-const imageUploadPath = "./uploads/images";
+const imageUploadPath = "./uploads/images" ;
+console.log(imageUploadPath)
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, imageUploadPath);
@@ -78,6 +78,7 @@ const storage = multer.diskStorage({
 });
 const imageUpload = multer({ storage: storage });
 app.post("/api/image-upload", imageUpload.array("myImage"), (req, res) => {
+  console.log("i reached the server")
   let filePath = req.files[0].path;
   let payload = photo(filePath, function (result) {
     return result;
