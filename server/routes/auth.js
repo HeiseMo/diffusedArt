@@ -6,7 +6,8 @@ router.get(
   "/redirect",
   passport.authenticate("discord", {
     failureRedirect: "/forbidden",
-    successRedirect: "http://localhost:3000",
+    //successRedirect: "http://localhost:3000",
+    successRedirect: "/",
   })
 );
 /*

@@ -12,7 +12,7 @@ export default class Navbar extends React.Component {
   render() {
     const handleClick = () => {
       window.location.href =
-        "https://discord.com/api/oauth2/authorize?client_id=1033867324907864105&redirect_uri=http%3A%2F%2F135.125.204.233%3A4000%2Fauth%2Fredirect&response_type=code&scope=identify";
+        "https://discord.com/api/oauth2/authorize?client_id=1033867324907864105&redirect_uri=http%3A%2F%2Fdiffusedhermit.com%2Fauth%2Fredirect&response_type=code&scope=identify";
       };
     return (
       <div className="navbar-main">

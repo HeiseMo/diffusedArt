@@ -15,7 +15,7 @@ export default class ImageList extends React.Component {
 
   getImages = () => {
     axios
-      .get("http://localhost:4000/images")
+      .get("/images")
       .then((response) => {
         const data = response.data;
         this.setState({ images: data });

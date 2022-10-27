@@ -23,7 +23,7 @@ const fetch = (...args) =>
 //Discord OAuth2
 const DiscordOauth2 = require("discord-oauth2");
 
-const corsOrigin = "http://diffusedhermit.com" || "http://localhost:3000";
+const corsOrigin = "http://diffusedhermit.com";
 // mongoose connection
 mongoose.connect(process.env.REACT_APP_MONGODB_URL, {
   useUnifiedTopology: true,

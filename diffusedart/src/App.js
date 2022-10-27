@@ -59,7 +59,6 @@ this.fetchUser()
         <Routes>
           <Route path="/" element={<Home logoutUser={this.logoutUser} getUser={this.getTheUser} login={this.state.login} user={this.state.loggedInUser}/>} />
           <Route path="/image/:Id"/>
-          <Route path="/auth"></Route>
           <Route path="*" element={<Error />} />
         </Routes>
       </Router>
