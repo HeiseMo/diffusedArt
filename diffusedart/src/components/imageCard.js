@@ -17,7 +17,7 @@ export default class imageCard extends React.Component {
     }
     return (
       <div key={this.props.id} onClick={this.toggleModal} className="img-container">
-        <img className="img-box" src={window.location.origin + this.props.location}></img>
+        <img className="img-box" src={this.props.location}></img>
         {this.state.modal && (
           <div className="modal">
             <div onClick={this.toggleModal} className="overlay"></div>

@@ -1,46 +1,53 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { renderMatches } from "react-router-dom";
 
-function UploadImage() {
-  const [image, setImage] = useState(null);
-
-  const handleUpload = (e) => {
+export default class UploadImage extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = { image: null };
+  }
+  handleUpload = (e) => {
     console.log("uploading");
     e.preventDefault();
     axios
-      .post("/api/image-upload", image)
+      .post("/api/image-upload", this.state.image)
       .then((res) => {
         console.log(res, "this is the response");
+        this.props.handleRefreshImages(res.data);
         return res
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  const getFileInformation = (event) => {
+  getFileInformation = (event) => {
     // this function is called when the user selects a file
     const formData = new FormData();
-    console.log(event.target.files[0]);
     formData.append(
       "myImage",
       event.target.files[0],
       event.target.files[0].name
     );
     console.log(formData);
-    setImage(formData);
+    this.setState({ image: formData });
   };
-  return (
-    <div>
-      <div>
-        <form>
-        <div className="input_container">
-        <button onClick={handleUpload}>Upload</button>
-          <input id="myInput" type="file" name="myImage" onChange={getFileInformation} />
-          
+
+    render() {
+
+
+      return (
+        <div>
+        <div>
+          <form>
+          <div className="input_container">
+          <button onClick={this.handleUpload}>Upload</button>
+            <input id="myInput" type="file" name="myImage" onChange={this.getFileInformation} />
+            
+          </div>
+          </form>
         </div>
-        </form>
       </div>
-    </div>
-  );
-}
-export default UploadImage;
+      );
+    }
+  }

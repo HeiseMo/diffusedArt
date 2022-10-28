@@ -8,11 +8,7 @@ export default class ImageList extends React.Component {
     images: [],
     filterdImages: [],
   };
-
-  componentDidMount() {
-    this.getImages();
-  }
-
+/*
   getImages = () => {
     axios
       .get("/api/images")
@@ -25,14 +21,14 @@ export default class ImageList extends React.Component {
         console.log(error);
       });
   };
-  
+  */
   render() {
     let data = this.props.searchValue;
 
     return (
       <div className="img-list">
-        {this.state.images.filter((item) => {
-          
+        {this.props.images.filter((item) => {
+          console.log(item)
           let count = 0;
             if (data == null) {
               return item;

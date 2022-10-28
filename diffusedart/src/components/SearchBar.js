@@ -10,21 +10,22 @@ export default class SearchBar extends React.Component {
     };
   }
 //  this.setState({ loggedInUser: this.props.user, login: this.props.login });
-  
   render() {
-    
     const handleChange = async (e) => {
       e.preventDefault();
       const { name, value } = e.target;
       await this.setState({ [name]: value });
       this.props.getSearchValue(this.state.setImageInput);
     };
+    const handleRefreshImages = (a) => {
+      this.props.handleRefreshImages(a)
+    };
     return (
       <div className="search">
         <div className="logoArea">
           <h1>Diffused Art</h1>
         </div>
-        {this.props.login ? <UploadImage /> : null}
+        {this.props.login ? <UploadImage handleRefreshImages={handleRefreshImages} /> : null}
         <div className="searchArea">
             <input
               type="text"
