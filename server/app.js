@@ -34,7 +34,7 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function () {
   console.log("we are connected!");
 });
-app.use("/upload", express.static(__dirname + "/uploads")); // serve static files
+app.use("/uploads", express.static(__dirname + "/uploads")); // serve static files
 
 
 app.use(
@@ -127,7 +127,8 @@ function photo(filePath, callback) {
   let size = "";
   let sampler = "";
   let seed = "";
-  let location = filePath.slice(8);
+  console.log(filePath, "filepath");
+  let location = filePath//slice(8);
   if (splitParameter.length > 2) {
     negPrompt = splitParameter[1].slice(17);
     extraInfo = splitParameter[2].toString("utf8").split(",");
