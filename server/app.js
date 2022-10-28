@@ -34,7 +34,7 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function () {
   console.log("we are connected!");
 });
-app.use("/", express.static(__dirname + "/uploads")); // serve static files
+app.use("/upload", express.static(__dirname + "/uploads")); // serve static files
 
 
 app.use(
@@ -68,20 +68,23 @@ let redirectUri = process.env.REACT_APP_DISCORD_OAUTH_REDIRECT_URI;
 const authRoute = require("./routes/auth");
 app.use("/api/auth", authRoute);
 
-const imageUploadPath = "./images" ;
-/*Serve /uploads directory with Express staticly*/
+const imageUploadPath = "./uploads/images" ; /*Need to figure out this, path is not working it doesnt find dir to upload, maybe i should continue using public holder in react client?*/
 
-console.log(imageUploadPath)
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
+    console.log("destination");
     cb(null, imageUploadPath);
+    console.log("i passed")
   },
   filename: function (req, file, cb) {
+    console.log(file.fieldname, "fieldname");
     cb(null, `${file.fieldname}_${Date.now()}_${file.originalname}`);
+    console.log("i passed a second time")
   },
 });
-console.log(storage, "storage");
 const imageUpload = multer({ storage: storage });
+console.log(imageUpload)
 app.post("/api/image-upload", imageUpload.array("myImage"), (req, res) => {
   console.log("i reached the server")
   console.log(req.files, "files", req.body, "body", res.files, "res");
@@ -124,7 +127,7 @@ function photo(filePath, callback) {
   let size = "";
   let sampler = "";
   let seed = "";
-  let location = filePath.slice(10);
+  let location = filePath.slice(8);
   if (splitParameter.length > 2) {
     negPrompt = splitParameter[1].slice(17);
     extraInfo = splitParameter[2].toString("utf8").split(",");
