@@ -127,8 +127,7 @@ function photo(filePath, callback) {
   let size = "";
   let sampler = "";
   let seed = "";
-  console.log(filePath, "filepath");
-  let location = filePath//slice(8);
+  let location = "/" + filePath//slice(8);
   if (splitParameter.length > 2) {
     negPrompt = splitParameter[1].slice(17);
     extraInfo = splitParameter[2].toString("utf8").split(",");
