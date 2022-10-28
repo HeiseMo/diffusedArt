@@ -4,12 +4,14 @@ import axios from "axios";
 function UploadImage() {
   const [image, setImage] = useState(null);
 
-  const handleUpload = () => {
+  const handleUpload = (e) => {
     console.log("uploading");
+    e.preventDefault();
     axios
       .post("/api/image-upload", image)
       .then((res) => {
         console.log(res, "this is the response");
+        return res
       })
       .catch((err) => {
         console.log(err);
