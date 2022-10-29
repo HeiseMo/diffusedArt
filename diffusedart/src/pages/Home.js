@@ -32,7 +32,7 @@ export default class Home extends React.Component {
             this.getImages()
           }
       return (
-        <div>
+        <div className="home">
           <Navbar logoutUser={this.props.logoutUser} login={this.props.login} user={this.props.user}/>
             <SearchBar handleRefreshImages={handleRefreshImages} login={this.props.login} user={this.props.user} getSearchValue={getSearchValue}/>
             <ImageList searchValue={this.state.searchValue} images={this.state.images}/>

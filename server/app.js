@@ -155,6 +155,7 @@ function photo(filePath, callback) {
 app.get("/api/images", (req, res) => {
   imageModel
     .find({})
+    .sort({ _id: -1 })
     .then((data) => {
       res.json(data);
     })

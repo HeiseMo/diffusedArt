@@ -15,6 +15,8 @@ export default class UploadImage extends React.Component {
       .then((res) => {
         console.log(res, "this is the response");
         this.props.handleRefreshImages(res.data);
+        document.getElementById("myLabel").innerHTML = "Choose File";
+        this.setState({ image: null });
         return res
       })
       .catch((err) => {
@@ -29,21 +31,25 @@ export default class UploadImage extends React.Component {
       event.target.files[0],
       event.target.files[0].name
     );
-    console.log(formData);
+    document.getElementById("myLabel").innerHTML = event.target.files[0].name;
     this.setState({ image: formData });
   };
-
+  check = () => {
+    alert("I am called")
+  }
     render() {
 
 
       return (
         <div>
-        <div>
+        <div className="form-area">
           <form>
-          <div className="input_container">
-          <button onClick={this.handleUpload}>Upload</button>
+          <div className="input-container">
+            <div onClick={this.handleUpload} className="upload-button"><div>Upload</div></div>
+          <label id="myLabel" className="custom-file-upload">
+            <p>Choose File</p>
             <input id="myInput" type="file" name="myImage" onChange={this.getFileInformation} />
-            
+            </label>
           </div>
           </form>
         </div>
